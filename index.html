@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="/DeathNight32/Historia-do-Brasil/favicon.png" type="image/png">
+    <title>História do Brasil em Três Épocas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --azul-bandeira: #1b2e7a;
+            --amarelo-bandeira: #f7d417;
+            --verde-bandeira: #2d6d4b;
+            --azul-claro: #e8f0fe;
+            --cinza-claro: #f8f9fa;
+            --cinza-medio: #e9ecef;
+            --cinza-escuro: #495057;
+            --sombra: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transicao: all 0.3s ease-in-out;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Lato', sans-serif;
+            line-height: 1.8;
+            color: var(--cinza-escuro);
+            background-color: var(--cinza-claro);
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--azul-bandeira) 0%, #0d1b4a 100%);
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 3rem;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+            opacity: 0.15;
+            z-index: 0;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--amarelo-bandeira);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            line-height: 1.2;
+        }
+        
+        .subtitle {
+            font-size: 1.25rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Era Sections */
+        .era-section {
+            background: white;
+            border-radius: 8px;
+            box-shadow: var(--sombra);
+            margin-bottom: 3rem;
+            overflow: hidden;
+            transition: var(--transicao);
+        }
+        
+        .era-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .era-header {
+            padding: 2rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .era-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .era-header::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(0,0,0,0.2), transparent);
+            z-index: 0;
+        }
+        
+        .colonial .era-header {
+            background: linear-gradient(135deg, var(--azul-bandeira) 0%, #2a4a9c 100%);
+        }
+        
+        .imperial .era-header {
+            background: linear-gradient(135deg, var(--amarelo-bandeira) 0%, #f8e054 100%);
+            color: var(--cinza-escuro);
+        }
+        
+        .republicano .era-header {
+            background: linear-gradient(135deg, var(--verde-bandeira) 0%, #3a8a65 100%);
+        }
+        
+        .era-content {
+            padding: 2.5rem;
+        }
+        
+        .era-content h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--azul-bandeira);
+            margin: 2rem 0 1rem;
+            font-size: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .era-content h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--amarelo-bandeira);
+        }
+        
+        .era-content h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--cinza-escuro);
+            margin: 1.5rem 0 0.8rem;
+            font-size: 1.2rem;
+        }
+        
+        .imperial-content h3 {
+            color: var(--azul-bandeira);
+        }
+        
+        .imperial-content h3::after {
+            background: var(--azul-bandeira);
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+        
+        ul {
+            list-style-position: inside;
+            margin: 1.5rem 0;
+        }
+        
+        li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        li::before {
+            content: "•";
+            color: var(--amarelo-bandeira);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .imperial-content li::before {
+            color: var(--azul-bandeira);
+        }
+        
+        strong {
+            color: var(--azul-bandeira);
+            font-weight: 700;
+        }
+        
+        /* Images */
+		
+        .content-image-personagens {
+            width: 500px;
+            max-width: 800px;
+            height: 400px;
+            margin: 1.5rem auto;
+            display: block;
+            border-radius: 4px;
+            box-shadow: var(--sombra);
+        }
+		
+		.content-image {
+            width: 350px;
+            max-width: 800px;
+            height: 350px;
+            margin: 1.5rem auto;
+            display: block;
+            border-radius: 4px;
+            box-shadow: var(--sombra);
+        }
+		
+		.content-image-capitania {
+            width: 700px;
+            max-width: 800px;
+            height: 700px;
+            margin: 1.5rem auto;
+            display: block;
+            border-radius: 4px;
+            box-shadow: var(--sombra);
+        }
+		
+		.content-image-Batalha-dos-Guararapes {
+            width: 750px;
+            max-width: 800px;
+            height: 421px;
+            margin: 1.5rem auto;
+            display: block;
+            border-radius: 4px;
+            box-shadow: var(--sombra);
+        }
+		
+		.content-video {
+         margin-left: 16.5rem;
+        }
+        
+        .image-caption {
+            text-align: center;
+            font-style: italic;
+            color: var(--cinza-escuro);
+            margin-top: -1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+        
+        /* Info boxes */
+        .info-box {
+            background-color: var(--cinza-medio);
+            border-left: 4px solid var(--amarelo-bandeira);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .imperial-content .info-box {
+            border-left-color: var(--azul-bandeira);
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--azul-bandeira) 0%, #0d1b4a 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        footer p {
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+        }
+        
+        /* Decorative Elements */
+        .divider {
+            height: 4px;
+            background: linear-gradient(90deg, var(--verde-bandeira) 0%, var(--amarelo-bandeira) 50%, var(--azul-bandeira) 100%);
+            margin: 3rem 0;
+            border-radius: 2px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .era-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .era-content {
+                padding: 1.5rem;
+            }
+            
+            header {
+                padding: 3rem 0;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .era-content h3 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>História do Brasil</h1>
+            <p class="subtitle">Uma jornada cronológica através das três grandes épocas que moldaram nossa nação</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Período Colonial (primeiro) -->
+        <div class="era-section colonial">
+            <div class="era-header">
+                <h2>Período Colonial (1500-1822)</h2>
+            </div>
+            <div class="era-content">
+                <h3>Era Colonial Brasileira (1500-1822): Política, Economia, Sociedade e Conflitos</h3>
+                <p>Brasil Colônia é o período que se estende de 1530, com a missão “exploradora” de Martim Afonso de Souza, a 1815, quando o então Estado do Brasil tornou-se Reino de Portugal, Brasil e Algarves. Foi durante esses anos que grande parte da extensão territorial que o Brasil tem hoje foi conquistada por meio de diversos conflitos com tamoios, tupinambás, espanhóis, holandeses, franceses, entre outros povos. A colonização do Brasil foi um processo complexo que moldou a identidade nacional, estabelecendo estruturas políticas, econômicas e sociais que perdurariam por séculos. Desde a chegada dos portugueses em 1500 até a independência em 1822, o Brasil passou por transformações profundas, marcadas pela exploração de recursos naturais, escravidão, conflitos armados e a formação de uma sociedade hierárquica. </p>
+                
+                <h3>Política e Administração Colonial</h3>
+				
+                <h4><strong>Período Pré-Colonial (1500-1530)</strong></h4>
+                <p>O Período Pré-Colonial diz respeito aos anos que antecederam a missão “colonizadora” chefiada por Martim Afonso de Souza (administrador colonial português) em 1530. Após a chegada da expedição marítima portuguesa, liderada por Pedro Álvares Cabral, em 22 de abril de 1500, nas terras que, posteriormente, viriam a ser chamadas de Brasil, Portugal passou a ocupar pequenos pontos isolados na costa marítima brasileira.
+                Um grupo de cristãos-novos (judeus convertidos ao cristianismo e seus descendentes) recebeu o monopólio de extração do pau-brasil, mas se limitou ao envio de apenas quatro expedições exploradoras com o objetivo de fazer o reconhecimento e mapeamento do território “descoberto”.
+                Ainda sem nome, a terra passou a ser chamada, nas cartas de Pero Vaz de Caminha e Mestre João, escritas em 1º de maio de 1500, de Vera Cruz. Outros nomes surgiram depois, como Terra dos Papagaios e Santa Cruz. O nome Brasil começou a aparecer em fontes a partir de 1512 e, posteriormente, acabou oficializando-se, sobretudo após 1530, com a nomenclatura “Estado do Brasil”.
+                No começo daquele século, o Império Português estava voltado para as Índias, que era a forma como os portugueses referiam-se à região que hoje consiste na Índia. Desde as Cruzadas, o comércio com o Oriente desenvolvera-se muito com os reinos cristãos situados na Europa Ocidental e Meridional. Contudo, desde a tomada de Constantinopla pelos otomanos em 1453, esse comércio começou a entrar em declínio. Quando as barreiras de comércio tornaram-se intransponíveis, Portugal voltou-se para o território americano. Nesse momento, começou, portanto, o que a historiografia chamou de Período Colonial.</P>
+                
+				<h4><strong>Antecedentes da chegada dos portugueses</strong></h4>
+				
+                <p>A chegada dos portugueses ao Brasil estava relacionada com o pioneirismo de Portugal e, depois, da Espanha, durante o desenvolvimento das grandes navegações marítimas. Primeiramente, nesse processo, deve-se levar em consideração a consolidação da monarquia em Portugal no século XIV, a qual garantia maior centralização de poder e estabilidade política.
+                Essa centralização do poder garantiu a Portugal um crescimento da sua atividade mercantil, e isso está muito relacionado com a sua proximidade com importantes centros do mundo islâmico. Além disso, Lisboa recebeu grandes investimentos de genoveses, interessados em desenvolver o comércio daquela região.
+                O impulso comercial que esse território sofreu, aliado à condição geográfica da região, possibilitou aos portugueses o desenvolvimento da navegação marítima. Atribui-se também uma relativa importância da Escola de Sagres a essa expansão marítima portuguesa. A geografia, por seu lado, facilitava esse movimento pela posição peninsular de Portugal e pela sua proximidade com as ilhas atlânticas e com as correntes marítimas do Oceano Atlântico.
+                O processo de expansão marítimo português levou o país a realizar uma série de “descobertas”, com o achamento das ilhas atlânticas, ao longo do século XIV, como Madeira e Açores. Além disso, os portugueses conseguiram atravessar o Cabo da Boa Esperança, no litoral sul da África, em direção à Índia. Esse processo expansionista desembocou na chegada dos portugueses ao Brasil, após os espanhóis terem anunciado sua chegada na América em 1492.</p>
+				
+                <h4><strong>Chegada dos portugueses ao Brasil</strong></h4>
+
+                <p>A chegada dos portugueses ao Brasil ocorreu com a expedição liderada por Pedro Álvares Cabral, composta por treze caravelas que partiram de Lisboa no dia 9 de março de 1500. Essa expedição tinha como destino final a Índia, porém, durante o trajeto, desviou-se do caminho original e acabou alcançando o Brasil, na região de Porto Seguro, em 22 de abril de 1500.
+                Existe um certo debate a respeito da intencionalidade da expedição de Pedro Álvares Cabral em sua vinda à América. Alguns historiadores afirmam que existia a intenção de Cabral em desviar-se do trajeto original. Outros especialistas, porém, discordam dessa ideia e afirmam que a chegada dos portugueses ao Brasil foi um evento ocasional.
+                A chegada dos portugueses ao Brasil iniciou o período conhecido como Pré-colonial, que foi caracterizado pelo aparente desinteresse de Portugal em relação às terras brasileiras. Isso ocorreu, sobretudo, porque o interesse da elite econômica portuguesa estava mais voltado ao desenvolvimento do comércio com a Índia, e por causa das dificuldades em averiguar as possibilidades econômicas do novo território.
+                Nesse momento, a política adotada pelos portugueses no Brasil foi a mesma implantada na costa do litoral africano, e, assim, incentivou-se a construção de feitorias, como as quatro construídas em Pernambuco, Cabo Frio, Rio de Janeiro e na Baía de Todos os Santos|1|. Essas feitorias funcionavam como entrepostos comerciais que armazenavam as mercadorias para serem transportadas para a Europa.
+                As primeiras iniciativas de exploração do território brasileiro foram entregues por Portugal para Fernão de Noronha, no período entre 1503 e 1505. Durante essas explorações, iniciou-se a principal atividade econômica do Brasil da fase pré-colonial: a exploração do pau-brasil. A rentabilidade dessa mercadoria devia-se, principalmente, à utilização da madeira para a produção de tinta. A exploração dessa matéria-prima seguiu como prática econômica no Brasil até o século XIX – apesar de ter sido mais intensa durante esse período exploratório inicial.
+                A extração do pau-brasil era feita com a mobilização do trabalho dos indígenas por meio do escambo. Os indígenas realizavam o corte e o transporte das toras da madeira até as feitorias e eram pagos por quinquilharias em geral, tais como espelhos, baús de metal, foices etc. Os nativos também forneciam aos portugueses mercadorias como a farinha.</p>
+
+                <h4><strong>Capitanias Hereditárias (1534-1549)</strong></h4>
+                <p>O declínio do comércio com a Índia e as ameaças de invasões estrangeiras no Brasil, principalmente dos franceses, mobilizaram Portugal para ampliar a colonização do Brasil. A partir de 1534, o território brasileiro foi dividido em quinze capitanias, e sua administração foi entregue a pessoas da pequena nobreza de Portugal, que deveriam desenvolver e garantir a lucratividade de sua capitania. Apenas <strong>Pernambuco (sob Duarte Coelho)</strong> e <strong>São Vicente (sob Martim Afonso de Sousa)</strong> prosperaram, devido ao cultivo da cana-de-açúcar. O fracasso do sistema levou à centralização do poder. </p>
+                
+                <img src="https://segredosdomundo.r7.com/wp-content/uploads/2019/04/o-que-foram-as-capitanias-hereditarias-historia-do-brasil.jpg" alt="Mapa das Capitanias Hereditárias do Brasil" class="content-image-capitania">
+                <p class="image-caption">Mapa das Capitanias Hereditárias do Brasil (1534)</p>
+                
+                <div class="info-box">
+                    <h4><strong>O Tratado de Tordesilhas</strong></h4>
+                    <p>O Tratado de Tordesilhas foi firmado em 7 de junho de 1494, na cidade de Tordesilhas, entre os reinos de Portugal e Castela (Espanha). O acordo surgiu em resposta à crescente competição entre as duas potências ibéricas pela posse de novas terras descobertas durante as Grandes Navegações.
+                    Após a chegada de Cristóvão Colombo à América em 1492, a Espanha buscou garantir legalmente suas novas possessões, levando à necessidade de um tratado que evitasse conflitos entre os dois reinos.
+                    O Tratado de Tordesilhas é considerado um marco na história das relações internacionais e na exploração marítima, pois foi um dos primeiros acordos a dividir o mundo entre potências coloniais. Ele ilustra as complexas dinâmicas de poder e a luta por recursos durante a Era das Descobertas.</p>
+                </div>
+				
+				<div class="info-box">
+                    <h4><strong>O Tratado Madrid</strong></h4>
+					<p><strong>Contexto Historico</strong></p>
+                    <p>O Tratado de Madrid foi um acordo diplomático firmado entre os reinos de Portugal e Espanha, representados pelos reis João V e Fernando VI, respectivamente. O tratado surgiu em um contexto de disputas territoriais que se intensificaram após o fim da União Ibérica (1580-1640), quando as fronteiras entre os dois países se tornaram mais fluidas e as reivindicações territoriais se tornaram mais complexas.
+                    <p><strong>Principais Termos do Tratado</strong></p>
+					<ul>
+					<li>Substituição do Tratado de Tordesilhas: O Tratado de Madrid visava substituir o Tratado de Tordesilhas, que já não era mais respeitado. Ambos os países reconheceram que haviam violado os termos do tratado anterior e concordaram em estabelecer novos limites baseados no princípio do uti possidetis, ita possideatis, que afirma que quem ocupa um território deve tê-lo reconhecido como seu.</li>
+					<li>Cessão de Territórios: Portugal cedeu a Colônia do Sacramento (atual Uruguai) para a Espanha, enquanto a Espanha reconheceu a posse portuguesa de várias áreas ocupadas, consolidando a expansão territorial do Brasil.</li>
+					</ul>
+					<p><strong>Consequências</strong></p>
+					<p>O Tratado de Madrid teve um impacto significativo nas fronteiras da América do Sul, contribuindo para a definição das atuais fronteiras do Brasil. No entanto, o tratado não durou muito tempo, sendo substituído pelo Tratado de El Pardo em 1761, devido a novas disputas territoriais que surgiram entre os dois países. Este tratado é considerado um marco importante na história colonial da América do Sul, pois ajudou a estabelecer um entendimento mais claro entre as potências coloniais sobre a posse e a administração de terras na região.</p>
+			    </div>
+				
+				<div class="info-box">
+                    <h4><strong>O Tratado El Pardo</strong></h4>
+					<p><strong>Contexto Historico</strong></p>
+                    <p>O Tratado de El Pardo foi assinado em um contexto de tensões entre Portugal e Espanha, especialmente devido à resistência dos indígenas e dos jesuítas na região das Missões Orientais, no atual Uruguai. A Guerra Guaranítica e a morte do rei espanhol Fernando VI, sucedido por Carlos III, levaram à necessidade de revisar os acordos anteriores.</p>
+                    <p><strong>Conteúdo do Tratado</strong></p>
+					<ul>
+					<li>Anulação do Tratado de Madrid: O tratado revogou todas as disposições do Tratado de Madrid de 1750, que havia estabelecido limites territoriais difíceis de implementar.</li>
+					<li>Recuperação da Colônia de Sacramento: Portugal recuperou a Colônia de Sacramento, que havia sido um ponto de conflito entre as duas coroas.</li>
+					<li>Revisão de limites: Foram estabelecidas novas diretrizes para a demarcação de fronteiras na América do Sul, visando evitar futuros conflitos.</li>
+					<ul>
+					<p><strong>Implicações</strong></p>
+					<p>O Tratado de El Pardo teve um impacto significativo nas relações entre Espanha e Portugal, representando uma tentativa de restabelecer a paz e a cooperação na região. No entanto, as tensões persistiram, e o tratado foi um passo em um processo mais amplo de negociação e conflito no contexto colonial. Este tratado é um exemplo de como as relações internacionais e os interesses coloniais das potências europeias influenciaram a configuração das fronteiras na América do Sul.</p>
+			    </div>
+					 
+                <h3><strong>Governo-Geral (1549-1808)</strong></h3> 
+                <p>Em 1549, Tomé de Sousa foi nomeado o primeiro governador-geral, estabelecendo Salvador como capital. A administração colonial passou a contar com três principais cargos:</p>
+                
+                <h3><strong>Ouvidor-mor (justiça)</strong></h3>
+                <p><strong>O que fazia?</strong></p>
+                <p>O Ouvidor-mor era o principal representante da justiça na colônia, responsável por aplicar as leis portuguesas e resolver disputas.</p>
+                
+                <p><strong>Principais obrigações:</strong></p>
+                <ul>
+                    <li>Aplicar a justiça – Julgava crimes e conflitos entre colonos, indígenas e autoridades</li>
+                    <li>Fiscalizar funcionários – Investigava abusos de poder por parte de outros administradores coloniais</li>
+                    <li>Organizar as ouvidorias – Criava tribunais locais nas capitanias</li>
+                    <li>Relatar à Coroa – Enviava informações sobre a situação jurídica da colônia a Portugal</li>
+                </ul>
+                
+                <p><strong>Exemplos de Atuação:</strong></p>
+                <ul>
+                    <li>Punir senhores de engenho que cometiam excessos contra escravizados</li>
+                    <li>Investigar corrupção de capitães-mores</li>
+                </ul>
+                
+                <h3><strong>Capitão-mor (defesa)</strong></h3>
+                <p><strong>O que fazia?</strong></p>
+                <p>O Capitão-mor era o chefe militar da colônia, encarregado da proteção contra invasões e revoltas.</p>
+
+                <p><strong>Principais obrigações:</strong></p>
+                <ul>
+                    <li>Defender o território – Organizava tropas contra invasores estrangeiros (franceses, holandeses)</li>
+                    <li>Manter a ordem – Reprimia rebeliões de indígenas, escravizados ou colonos insatisfeitos</li>
+                    <li>Comandar as milícias – Recrutava soldados e organizava a defesa das vilas</li>
+                    <li>Fiscalizar fortalezas – Supervisionava a construção e manutenção de fortificações</li>
+                </ul>
+
+                <p><strong>Exemplos de Atuação:</strong></p>
+                <ul>
+                    <li>Liderar a resistência contra os holandeses em Pernambuco (século XVII)</li>
+                    <li>Combater quilombos como o de Palmares</li>
+                </ul>
+                
+                <h3><strong>Provedor-mor (finanças)</strong></h3>
+                <p><strong>O que fazia?</strong></p>
+                <p>O Provedor-mor era o responsável pela administração financeira da colônia, garantindo que os impostos fossem coletados e enviados a Portugal.</p>
+
+                <p><strong>Principais obrigações:</strong></p>
+                <ul>
+                    <li>Cobrar impostos – Fiscalizava o pagamento do quinto do ouro e outros tributos</li>
+                    <li>Controlar gastos – Geria os recursos da Coroa na colônia</li>
+                    <li>Supervisionar o comércio – Impedia o contrabando e fraudes alfandegárias</li>
+                    <li>Financiar obras públicas – Custear a construção de estradas, portos e edifícios governamentais</li>
+                </ul>
+
+                <p><strong>Exemplos de Atuação:</strong></p>
+                <ul>
+                    <li>Aplicar a Derrama (cobrança forçada de impostos atrasados) em Minas Gerais</li>
+                    <li>Fiscalizar o comércio de açúcar e ouro para evitar sonegação</li>
+                </ul>
+                
+                <p>A Companhia de Jesus, liderada por Manuel da Nóbrega e José de Anchieta, desempenhou papel crucial na catequização indígena e na educação durante todo o período colonial.</p>
+            
+			    <h3>Economia Colonial: Ciclos e Exploração</h3>
+				
+				<h3>Ciclo do Pau-Brasil (1500-1530)</h3>
+				
+                <p>O ciclo do pau-brasil ocorreu durante a fase pré-colonial (1500-1530) do Brasil. Foi o primeiro produto a ser explorado pelos portugueses durante a época da colonização.
+                O pau-brasil é uma árvore nativa da Mata Atlântica que já era utilizada pelos índios para o tingimento de tecidos. Assim, quando os portugueses notaram seu uso, começaram a explorar o pau-brasil e enviar para a Europa, onde já era muito apreciada, na medida que os árabes já comercializam uma planta tingidora que vinha da Índia. A tinta do pau-brasil é de coloração vermelha e era encontrada sobretudo nas regiões costeiras, o que facilitou ainda mais sua exploração. Desde o início do século XVI, a Coroa Portuguesa recebia valores altos para a exploração do pau-brasil.
+                Foram necessárias três expedições para realizar a extração do pau-brasil: primeira expedição (1502), segunda expedição (1503) e terceira expedição (1504). No entanto, durante anos de exploração, o pau-brasil chegou em processo de extinção. Isso dificultou a economia da metrópole, que rapidamente desenvolveu outras formas de enriquecer, por exemplo, com a produção da cana-de-açúcar, que já era cultivada em colônias portuguesas.</p>
+                
+				<h4><strong>Curiosidade</strong></h4>
+				
+				<p>No início do século XVI os portugueses utilizaram o processo de trocas com os índios para conseguirem o pau-brasil.
+                Mais tarde, eles começaram a escravizar os índios, obrigando-os a cortarem as árvores, uma vez que os escravos africanos eram muito caros.
+                Essa imposição foi bem difícil para os portugueses, na medida que os índios fugiam e conheciam melhor o território. Além disso, eles contraíram diversas doenças do homem branco, o que levou a mortandade de milhares de indígenas.
+                Foi em 1570 que a escravidão indígena foi proibida pela primeira vez, no entanto, ela permaneceu até o final do século XVIII. Aos poucos, os índios foram substituídos pelos escravos africanos.
+                Ainda que a maior parte da exploração da madeira tenha sido realizada na primeira década, ela permaneceu até o século seguinte, quando perdeu sua importância no mercado consumidor. Isso porque o transporte era dispendioso e outro produto começava a ser comercializado: o açúcar.</p>
+				
+				<p><strong>Dispendioso:</strong>que exige muito dispêndio (de dinheiro); que dá despesa; caro</p>
+				
+                <h3>Ciclo do Açúcar (1530-1700)</h3>
+				
+                <p>Introduzido por Martim Afonso de Sousa, o açúcar tornou-se a base da economia colonial. O sistema plantation combinava:</p>
+
+                <h4>Monocultura (cana-de-açúcar)</h4>
+				
+				<p>A monocultura da cana-de-açúcar no Brasil começou no século XVI, especialmente nas regiões Nordeste, São Paulo e Minas Gerais, devido às condições climáticas e características do solo favoráveis ao cultivo. Essa prática se tornou a base da economia agrícola brasileira, voltada principalmente para a exportação. A cana-de-açúcar é uma das principais monoculturas do país, desempenhando um papel crucial na produção e exportação de commodities agrícolas. Essa monocultura, embora tenha contribuído para o desenvolvimento econômico, também levanta preocupações sobre os impactos ambientais e a sustentabilidade da agricultura.</p>
+
+                <h4>Latifúndios (grandes propriedades)</h4>
+				
+				<p>Latifúndio corresponde a uma extensa propriedade agrícola privada, geralmente não exploradas economicamente, portanto improdutivas. Quando exploradas são destinadas ao cultivo de um único produto agrícola (monocultura), com finalidade de abastecer, comumente, o mercado externo, devido à produção em larga escala. Uma das principais características do latifúndio é a concentração das propriedades nas mãos de poucos proprietários rurais, famílias ou empresas. Essa concentração fundiária está associada a diversos conflitos e lutas por terra no Brasil.</p>
+
+                <h4>Escravidão africana (após a resistência indígena e pressão jesuítica)</h4>
+				
+				<p>A escravidão africana no Brasil se tornou a principal forma de trabalho escravo após a resistência indígena e a pressão jesuítica. Os portugueses, ao invés de capturar indígenas, começaram a explorar o tráfico negreiro, que trouxe uma nova forma de mão de obra forçada para a colônia. Ela foi fundamental para a economia colonial e imperial do Brasil, sendo utilizada em plantações de açúcar, mineração e outras atividades. Os escravizados africanos eram tratados como mercadorias, sem direitos, sujeitos a castigos físicos e separação de famílias.</p>
+
+                <p><strong>Pernambuco e Bahia foram os principais centros produtores. Os holandeses, após serem expulsos em 1654, estabeleceram concorrência nas Antilhas, enfraquecendo o monopólio português.</strong></p>
+
+
+                <h3>Drogas do Sertão</h3>
+				<p>As drogas do sertão eram produtos extraídos da Floresta Amazônica no século XVII, comercializados pelos portugueses na Europa para consolidar sua presença no Norte do Brasil e evitar invasões de franceses, holandeses e ingleses. A mão de obra utilizada era indígena, sobretudo por meio de missões jesuíticas e expedições bandeirantes.</p>
+				
+				<p><strong>Principais produtos:</strong></p>
+				<ul>
+				<li>Guaraná</li>
+				<li>Salsa (ou salsaparrilha)</li>
+				<li>Urucum</li>
+				<li>Cacau</li>
+				<li>Baunilha</li>
+				<li>Castanha-do-pará</li>
+				<ul>
+				
+				<p><strong>Contexto histórico:</strong></p>
+				<p>Com o declínio do comércio de especiarias asiáticas, as drogas do sertão ganharam importância econômica. Portugal fortaleceu sua ocupação na Amazônia, construindo fortes como o de Belém, enquanto jesuítas e bandeirantes disputavam o controle da extração.</p>
+				
+				<p><strong>Declínio:</strong></p>
+				<p>No século XVIII, a descoberta de ouro em Minas Gerais deslocou o eixo econômico para o centro-sul do Brasil, reduzindo o interesse nas drogas do sertão. A mão de obra escravizada foi redirecionada para a mineração, marcando o fim desse ciclo comercial.</p>
+				
+
+                <h3>Ciclo do Ouro (1695-1800)</h3>
+				
+                <p>A descoberta de ouro em Minas Gerais (1695) provocou uma corrida migratória e a fundação de cidades como Ouro Preto e Mariana. A Coroa portuguesa impôs:</p>
+
+                <h4>O Quinto (20% do ouro extraído)</h4>
+				
+				<p>O Quinto do Ouro era um imposto cobrado pela Coroa Portuguesa sobre a extração de ouro no Brasil durante o período colonial. Este imposto correspondia a 20% do ouro extraído, que era enviado diretamente para a Coroa. A cobrança do Quinto gerou grande insatisfação entre os colonos, que o consideravam abusivo e contribuíram para várias revoltas, como a Inconfidência Mineira. As Casas de Fundição, onde o ouro era fundido e o imposto era retirado, também foram vistas como um obstáculo para a liberdade econômica dos colonos</p>
+
+                <h4>A Derrama (cobrança forçada de impostos atrasados)</h4>
+				
+				<p>Mecanismo de recolhimento de tributos para fazer face a déficits orçamentários da Coroa. A criação e regulamentação da derrama, por meio do alvará régio de 3 de dezembro de 1750, se inseriam no âmbito de uma política ostensiva de restrições e exigências financeiras que sustentavam o pacto colonial, com o objetivo de combater o contrabando e a evasão fiscal. Os descaminhos do ouro conduziram a medidas de reforma da administração pombalina para Minas Gerais, dentre as quais se destaca a decretação da derrama, cuja primeira aplicação ocorreu entre os anos de 1763-1764. A cobrança forçada dos impostos atrasados buscava arrecadar 17 arrobas de ouro correspondentes aos 13 anos de quinto insuficiente. As sucessivas derramas decretadas em Minas Gerais entre 1764 e 1777 revelam que, antes de ser opressiva, a política ilustrada de Portugal buscou envolver os mineiros na tarefa de arrecadação do quinto, além de estreitar seus vínculos com a metrópole. Quanto mais intenso o contrabando, maior seria a possibilidade do não preenchimento da cota aurífera nas Casas de Fundição, dando causa, por conseguinte, ao acometimento da derrama. Dessa forma, articulava-se uma política fazendária em que o súdito, deixando de ser apenas alvo da carga tributária, passava a participar diretamente nos esforços de arrecadação.</p>
+
+                <p><strong>A exploração descontrolada levou ao esgotamento das minas no século XVIII.</strong></p>
+				
+				
+                <h3>Religião e Sociedade</h3>
+				
+				<h4><strong>A Igreja Católica</strong></h4>
+				
+                <h4>Os jesuítas foram fundamentais na colonização, atuando na:</h4>
+
+                <p>Catequese indígena (reduções missionárias)</p>
+
+                <p>Educação (fundação de colégios como o da Bahia)</p>
+
+                <p>Controle social (imposição de valores cristãos)</p>
+
+                <p><strong>Conflitos entre jesuítas e colonos sobre a escravização indígena levaram à substituição por mão de obra africana.</strong></p>
+
+                <h4><strong>Estrutura Social</strong></h4>
+
+                <h4>A sociedade colonial era rigidamente estratificada:</h4>
+
+                <p>Elite branca (senhores de engenho, altos funcionários)</p>
+
+                <p>Camadas médias (comerciantes, artesãos, clero)</p>
+
+                <p>Escravizados (africanos e indígenas)</p>
+
+                <p><strong>A escravidão africana tornou-se predominante, com cerca de 5 milhões de pessoas traficadas até o século XIX</strong></p>
+				
+				<h3>Conflitos e Resistências</h3>
+				
+                <h4><strong>Invasões Estrangeiras</strong></h4>
+
+                <h4>Franceses:</h4> 
+				
+				<h4><strong>França Antártica (1555-1567, Rio de Janeiro) - derrotados por Mem de Sá</strong></h4>
+				<p>Os franceses estiveram presentes no Brasil desde os primeiros anos do período pré-colonial, contrabandeando pau-brasil. Contudo, em 1555, um grupo de franceses huguenotes (protestantes), liderado por Villegaignon e Coligny, fundaram uma colônia francesa na região do Rio de Janeiro conhecida como França Antártica. Os objetivos desse grupo eram iniciar a dominação francesa no Brasil, entrar na exploração mercantil de nossas riquezas e dar abrigo aos protestantes perseguidos, na França, pelo governo católico. A invasão francesa ao Rio de Janeiro, entre 1555 e 1567, está estreitamente ligada ao Tratado de Tordesilhas, visto que os reis da França não aceitavam a divisão do mundo entre espanhóis e portugueses. Em novembro de 1555, uma expedição de 600 pessoas, constituída de católicos, protestantes e criminosos recrutados nas prisões francesas, aportou na Baía da Guanabara, sob o comando do almirante Nicolau Durand de Villegaignon. O local escolhido para sede da colônia foi a ilha de Sergipe, hoje denominada Villegaignon, onde, com o apoio dos índios,  foi construído o Forte de Coligny.</p>
+				<img src="https://www.coladaweb.com/wp-content/uploads/2014/12/Franca-Antartica.png" alt="" class="content-image">
+                <p class="image-caption">Mapa da França Antártica feito pelos franceses da época e a Baía de Guanabara.</p>
+				<p>Os franceses trataram de se aliar aos índios locais. Fazendo contrabando de pau-brasil, os franceses negociavam diretamente com os indígenas. Para facilitar esse contato, procuraram conhecer e assimilar os seus hábitos, o que ajudou a realizar a aliança com os tupinambás, indígenas que habitavam o litoral e que haviam se tornado inimigos dos portugueses, especialmente quando estes passaram a escravizá-los, no início da colonização do Brasil. Os colonos franceses se aproveitaram disso na sua luta contra os portugueses pela posse do Brasil. Aliaram-se aos índios que haviam feito uma revolta, a chamada Confederação dos Tamoios, e ameaçavam atacar as feitorias e os postos lusitanos do litoral. Prevendo o desastre que seria um levante de índios aliados às tropas francesas que ocupavam o Rio de Janeiro, os jesuítas Manuel da Nóbrega e José de Anchieta procuraram negociar a paz. Ofereceram-se como reféns dos índios e, durante três meses, negociaram com eles, até convencer o cacique Kunhambebe a depor as armas.</p>
+				<p><strong>A expulsão dos Franceses:</strong></p>
+				<p><strong>A Expulsão dos Franceses da França Antártica: Conflito e Estratégia no Brasil Colonial</strong></p>
+				<p>No século XVI, enquanto Portugal consolidava sua presença no Brasil, a França desafiava o Tratado de Tordesilhas, buscando estabelecer suas próprias colônias em terras portuguesas. Em 1555, liderados pelo almirante Nicolas Durand de Villegagnon, os franceses desembarcaram na Baía de Guanabara, um território ainda pouco ocupado pelos lusitanos. Ali, fundaram a França Antártica, uma colônia que serviria tanto como refúgio para huguenotes (protestantes perseguidos na França) quanto como base para o comércio de pau-brasil e a disputa pelo controle do Atlântico Sul.</p>
+				<p>Villegagnon escolheu a Ilha de Serigipe (atual Ilha Villegaignon) para erguer o Forte Coligny, uma estrutura defensiva com cinco baterias de canhões voltadas para o mar, projetada para resistir a ataques navais. Os franceses também se espalharam por outras áreas estratégicas, como Uruçu-mirim (hoje Flamengo) e a Ilha do Governador, consolidando uma presença militar e comercial. Um dos fatores cruciais para a permanência francesa foi a aliança com os povos Tamoios e Tupinambás, que viam os portugueses como invasores. Os franceses, ao contrário dos lusitanos, adotaram uma abordagem mais diplomática, praticando o cunhadismo (casamentos com indígenas) e oferecendo armas de fogo em troca de apoio. Essa união resultou na Confederação dos Tamoios, uma coalizão de tribos disposta a expulsar os portugueses do litoral.</p>
+				<p>A Coroa Portuguesa, alarmada com a presença francesa, ordenou ao governador-geral Mem de Sá que organizasse a expulsão dos invasores. Em 1560, ele partiu de Salvador com uma frota composta por duas naus e oito embarcações menores, carregando soldados, colonos e jesuítas. O ataque inicial ao Forte Coligny foi devastador: os portugueses usaram artilharia pesada para bombardear as defesas francesas, seguido por um desembarque de tropas que incendiaram o forte. No entanto, sem recursos para uma ocupação prolongada, os portugueses recuaram, permitindo que os franceses retomassem posições. A resistência francesa se manteve graças ao apoio indígena, mas os jesuítas Manuel da Nóbrega e José de Anchieta conseguiram minar essa aliança. Através de negociações, firmaram o Armistício de Iperoig, convencendo os Tamoios a abandonar os franceses em troca de promessas de paz e proteção.</p>
+				<p>Em 1565, Portugal enviou reforços liderados por Estácio de Sá, sobrinho de Mem de Sá. Com uma frota ampliada e o apoio crucial do líder indígena Araribóia (dos Temiminós), os portugueses lançaram uma ofensiva decisiva. A estratégia combinou ataques navais com desembarques anfíbios, enquanto Araribóia e seus guerreiros atacavam por terra, flanqueando as posições francesas. A batalha culminou em 20 de janeiro de 1567, quando as forças luso-indígenas cercaram os últimos redutos franceses. Os combates foram brutais: os franceses, armados com mosquetes e canhões, resistiram ferozmente, mas foram superados pelo número e pela tática de cerco. Estácio de Sá, porém, foi ferido por uma flecha envenenada e morreu semanas depois, tornando-se um mártir da conquista.</p>
+				<p>Com a vitória, os portugueses fundaram a Cidade de São Sebastião do Rio de Janeiro, em homenagem ao rei D. Sebastião e ao santo padroeiro. Araribóia foi recompensado com terras na região, onde mais tarde surgiria Niterói. A expulsão dos franceses marcou o fim da França Antártica, mas não das ambições gaulesas no Brasil. Em 1612, eles retornariam no Maranhão, fundando a França Equinocial, só derrotados em 1615. Para Portugal, a vitória no Rio consolidou o domínio sobre o litoral e acelerou a colonização, transformando a região em um ponto estratégico para o império ultramarino. A guerra também evidenciou a importância das alianças indígenas e da estratégia militar combinada, mostrando que, no Brasil colonial, a sobrevivência dependia tanto de armas quanto de diplomacia.</p>
+				
+				
+                <h4><strong>França Equinocial (1612-1615, Maranhão) – derrotados por Jerônimo de Albuquerque</strong></h4>
+				<p>A França Equinocial representou a segunda tentativa dos franceses de se fixarem no Brasil, na região maranhense entre os anos de 1612 a 1615. A origem do nome está relacionado com o território de conquista, posto que estava próximo da linha do Equador, que antes era denominada de linha Equinocial. Esse evento ocorreu após a França Antártica, colônia francesa que durou cerca de quinze anos no Rio de Janeiro. A partir disso, os franceses resolveram ocupar outra parte do território colonial português. Em março de 1612, uma expedição liderada por Daniel de La Touche (1570-1631) e se aliaram aos dos índios Tupinambás. As tribos indígenas e os franceses já estavam familiarizados uns com os outros, pois navegantes vindos da França já rondavam a região. O próprio La Touche esteve por ali duas vezes. Os indígenas, por sua vez, apelidaram os franceses de papagaios amarelos, pois estes eram loiros e tagarelas como as aves. Com isto, fundam uma segunda colônia francesa denominada “França Equinocial”, cuja capital era a cidade de São Luís em homenagem ao rei e ao santo patrono da França. Apesar de ser de religião calvinista, Daniel de La Touche trazia frades capuchinhos (franciscanos) na sua esquadra que rezaram a primeira missa pela fundação da cidade. Em três anos, o território francês se expandiu para os atuais estados do Pará, Amapá e Tocantins.</p>
+                <p><strong>A expulsão dos Franceses:</strong></p>
+				<p><strong>A Última Bandeira Francesa no Brasil: O Sangrento Cerco de São Luís (1615)</strong></p>
+				<p>O vento úmido do Atlântico soprava sobre as paliçadas do Forte de São Luís quando o primeiro canhão rugiu. Daniel de La Touche, com seu gibão de couro enegrecido pela pólvora, observava através da luneta enquanto as velas portuguesas surgiam no horizonte. Eram 19 de novembro de 1614, e a última colônia francesa no Brasil preparava-se para seu momento de glória... ou ruína.</p>
+                <p><strong>A Artilharia que Abalou o Equador</strong></p>
+                <p>Os portugueses trouxeram da Bahia seis colubrinas de bronze - monstros que lançavam pelouros de 24 libras a mais de um quilômetro de distância. O primeiro impacto contra as muralhas de taipa do forte fez tremer o solo como um terremoto. Os artilheiros franceses, veteranos das guerras religiosas da Europa, responderam com seus falconetes mais ágeis, mirando precisamente nos pontos onde a fumaça revelava o recarregamento da artilharia inimiga.</p>
+                <p><strong>A Noite dos Facões</strong></p>
+                <p>Enquanto os canhões trocavam fogo, 200 guerreiros Potiguaras, aliados dos portugueses, infiltraram-se pelos manguezais. Seus corpos pintados de urucum misturavam-se com o entardecer quando lançaram o ataque noturno. Facões de aço flamengo brilharam na luz das fogueiras quando abriram as gargantas dos sentinelas franceses. Os Tupinambás, aliados da França, contra-atacaram com zarabatanas que lançavam dardos envenenados - um tiro certeiro no pescoço de um capitão português fez sua carne apodrecer em três dias.</p>
+                <p><strong>O Milagre de Guaxenduba</strong></p>
+                <p>Ao amanhecer de 19 de novembro, La Touche ordenou o ataque decisivo. Seus 120 mosqueteiros, dispostos em três linhas alternadas, avançaram com disciplina mortal. A primeira salva francesa varreu a vanguarda portuguesa. Foi quando Jerônimo de Albuquerque revelou seu golpe de mestre: dois canhões leves escondidos atrás de duna, carregados com metralha. Quando dispararam a 50 passos, transformaram a linha francesa em carne e osso esfacelados. Os sobreviventes recuaram em desordem, pisoteando seus próprios mortos.</p>
+                <p><strong>O Último Banquete</strong></p>
+                <p>Dentro do forte sitiado, a situação tornara-se desesperadora. Os franceses comiam ratos e couro fervido. Um grupo de Tupinambás desertores foi capturado tentando fugir - La Touche ordenou que fossem enforcados nas muralhas como advertência. Quando a pólvora acabou, os defensores começaram a desmontar os canhões para usar os projéteis como munição de mosquete.</P>
+                <p><strong>A Rendição</strong></p>
+                <p>Em 4 de novembro de 1615, com apenas 37 franceses ainda em condições de lutar, a bandeira branca foi hasteada. Os termos foram duros: os sobreviventes marchariam desarmados entre duas fileiras de soldados portugueses e indígenas, entregando suas armas numa pilha que seria queimada. Quando as últimas naus francesas desapareceram no horizonte, os vencedores descobriram nos porões do forte os diários dos derrotados - páginas e páginas descrevendo um paraíso tropical que escapara para sempre de suas mãos. O cheiro de pólvora queimada ainda pairava sobre São Luís quando os primeiros tijolos da nova colônia portuguesa começaram a ser assentados... sobre as cinzas do sonho francês.</p>
+				
+				<p><strong>Assista o video abaixo para saber mais</strong></p>
+				
+				<iframe width="560" height="315" 
+                src="https://www.youtube.com/embed/-uqdLifiiO0" class = "content-video"
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+                </iframe>
+
+				
+                <h4>Holandeses:</h4>
+
+				<p><strong>A Ocupação Holandesa no Brasil</strong></p>
+				<p>No século XVII, enquanto Portugal estava sob domínio espanhol durante a União Ibérica (1580-1640), os holandeses viram-se impedidos de participar do lucrativo comércio do açúcar brasileiro. Como estavam em guerra contra a Espanha, decidiram tomar uma atitude drástica: invadir diretamente as principais regiões produtoras de açúcar no Brasil.</p>
+				<p><strong>As Invasões Holandesas</strong></p>
+				<p>A primeira tentativa ocorreu em 1624, quando uma frota holandesa conquistou Salvador, na Bahia. Porém, após um ano de ocupação, foram expulsos por uma força conjunta luso-espanhola. A segunda e mais importante invasão aconteceu em 1630, quando os holandeses tomaram Pernambuco, estabelecendo sua sede em Recife.</p>
+				<p><strong>O Governo de Maurício de Nassau</strong></p>
+				<p>O período mais próspero da ocupação ocorreu entre 1637 e 1644, sob o comando de João Maurício de Nassau. Ele transformou Recife em uma cidade moderna, com pontes, palácios e jardins botânicos. Nassau também trouxe artistas e cientistas holandeses para documentar a natureza e a vida no Brasil, resultando em obras de arte importantes. Além disso, manteve uma política de tolerância religiosa, permitindo a construção da primeira sinagoga das Américas.</p>
+				<p><strong>A Revolta Contra os Holandeses</strong></p>
+				<p>Após a saída de Nassau, a Companhia das Índias Ocidentais começou a cobrar dívidas dos senhores de engenho com juros altíssimos. Essa pressão financeira, somada à intolerância religiosa contra os católicos, levou à Insurreição Pernambucana em 1645. Liderados por André Vidal de Negreiros, João Fernandes Vieira, o indígena Filipe Camarão e o negro Henrique Dias, os luso-brasileiros iniciaram uma guerra de resistência.</p>
+				<p><strong>Principais batalhas da Insurreição Pernambucana</strong></p>
+				<ul>
+                   <li>Batalha do Monte das Tabocas: ocorrida em 19 de abril de 1645, foi a primeira batalha vencida pelos luso-brasileiros.</li>
+                   <li>Batalha de São Lourenço, ou Batalha de Tejucupapo: ocorrida em 24 de abril de 1646, ficou conhecida pelo fato de 600 holandeses terem sido derrotados pelas mulheres da vila de Tejucupapo, já que os homens do local teriam ido ao Recife para vender a produção agrícola.li>
+                   <li>Batalhas de Guararapes: duas batalhas, uma em 1648 e outra em 1649. Ambas perdidas pelos holandeses.</li>
+				   <li>Batalha de Campina Taborda: ocorrida em 26 de janeiro de 1654, foi a última travada entre os rivais.</li>
+               </ul>
+			   <p><strong>Batalhas de Guararapes (1648-1649)</strong></p>
+			   <p>Entre as listadas acima, as de maior destaque foram as duas Batalhas de Guararapes, ocorridas no Morro de mesmo nome, entre abril de 1648 e fevereiro de 1649. Em ambas os holandeses foram derrotados.</p>
+			   <p><strong>O Epico das Batalhas dos Guararapes</strong></p>
+			   <p>O rugido dos canhões ecoava pelos manguezais quando, naquele abril de 1648, as forças luso-brasileiras se preparavam para escrever uma das páginas mais gloriosas de nossa história. Nos Montes Guararapes, onde os ventos sopravam carregados do sal do Atlântico, 2.200 patriotas - uma mistura de portugueses endurecidos pelo sol tropical, indígenas conhecedores dos segredos da terra e africanos libertos - enfrentariam um exército holandês duas vezes maior.</p>
+			   <p>Na madrugada do dia 18, enquanto a névoa ainda envolvia os pântanos, os primeiros disparos romperam o silêncio. Os holandeses, com seus uniformes azuis e mosquetes reluzentes, avançavam confiantes. O que não sabiam era que cada atoleiro, cada grotão daquele terreno pantanoso havia se tornado uma armadilha mortal. Os brasileiros, liderados por veteranos das guerras coloniais, transformaram o próprio manguezal em aliado.</p>
+			   <p>Quando a poeira baixou no dia 19, o saldo era estarrecedor: 1.200 baixas holandesas contra apenas 84 do lado brasileiro. A vitória foi tão retumbante que ecoou através dos séculos - tanto que hoje o Exército Brasileiro considera aquela data como seu marco fundador.</p>
+			   <p>Mas a história ainda reservava outro capítulo. Em fevereiro de 1649, os holandeses voltaram, determinados a apagar a humilhação anterior. Desta vez, encontraram um inimigo ainda mais organizado. Na segunda Batalha dos Guararapes, a carnificina foi ainda maior: cerca de 2.000 soldados da WIC tombaram, enquanto os defensores perderam apenas 47 homens.</p>
+			   <img src="https://escolaeducacao.com.br/wp-content/uploads/2020/10/batalhas-guararapes-2-750x421.jpg" alt="" class="content-image-Batalha-dos-Guararapes">
+               <p class="image-caption">Batalha dos Guararapes (1648-1649)</p>
+			   <p>O que torna essas batalhas verdadeiramente especiais não são apenas os números impressionantes, mas o simbolismo que carregam. Ali, no solo encharcado de sangue holandês, europeus, indígenas e africanos lutaram lado a lado como irmãos de armas. Essa união das "três raças", tão celebrada em nossa historiografia, talvez tenha sido a primeira manifestação concreta do que viria a se tornar o espírito brasileiro.</p>
+				
+				<p><strong>Assista o video abaixo para saber mais</strong></p>
+				
+				<iframe width="560" height="315" 
+                src="https://www.youtube.com/embed/EP5GnomiyPA" 
+                class="content-video"
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+                </iframe>
+				
+			   <div class="info-box">
+			   <h4><strong>WIC (sigla em holandês para "West-Indische Compagnie")</strong></h4>
+			   <p>foi a Companhia Neerlandesa das Índias Ocidentais, uma poderosa empresa mercantil criada pelos holandeses em 1621 durante a Guerra dos Oitenta Anos contra a Espanha. Seu principal objetivo era dominar o comércio colonial nas Américas e na África, especialmente o lucrativo negócio do açúcar brasileiro, que antes era controlado por Portugal mas foi bloqueado pela Espanha durante a União Ibérica (1580-1640)</p>
+			   </div>
+				
+                <h3>Revoltas Coloniais</h3>
+				
+                <p><strong>A Revolta dos Beckman (1684) – O Grito do Maranhão</strong></p>
+				<p>São Luís do Maranhão, 1684. O cheiro de canela e cravo misturava-se ao odor de revolta nos armazéns da Companhia de Comércio. Os irmãos Beckman, Manuel e Tomás, reuniam fazendeiros e colonos com os punhos cerrados. "Chega de monopólio!", bradavam. A cidade, sufocada pelos preços abusivos e pela escassez de escravos indígenas, explodiu em fúria. A Coroa respondeu com forcas e degredos, mas o sangue derramado naquelas ruas de terra batida marcaria o primeiro grande levante contra a opressão metropolitana.</p>
+
+                <p><strong>Guerra dos Emboabas (1707-1709) – Ouro e Traição nas Minas</strong></p>
+				<p>Nas serras de Minas Gerais, o ouro brilhava mais que a lealdade. Os bandeirantes paulistas, descobridores das minas, viram-se cercados por forasteiros – os "emboabas" – ávidos por riqueza. O conflito estourou nas margens do Rio das Mortes, onde o lendário Borba Gato traçou linhas de sangue. A Capela de Nossa Senhora do Ó assistiu a emboscadas cruéis, como o massacre onde 300 paulistas foram enganados com promessas de paz e depois trucidados. A terra que dava fortuna também alimentava traições.</p>
+
+                <p><strong>Guerra dos Mascates (1710-1711) – A Nobreza Contra o Progresso</strong></p>
+				<p>Recife, 1710. O som dos mascates (comerciantes portugueses) contando moedas ecoava como um insulto nos salões decadentes de Olinda. A aristocracia açucareira, endividada e orgulhosa, via sua hegemonia ruir ante a ascensão dos comerciantes. Quando Recife tornou-se vila independente, a guerra civil foi inevitável. Igrejas viraram quartéis, e o açúcar manchou-se de sangue. Não era apenas uma disputa territorial – era o velho Brasil colonial agonizando diante de uma nova ordem econômica.</p>
+				
+				<p><strong>Revolta de Vila Rica (1720) – O Imposto que Incendiou as Minas</strong></p>
+				<p>Vila Rica, 1720. O governador Conde de Assumar entrou na cidade com uma escolta armada e uma notícia que queimava como pólvora: a criação das Casas de Fundição e novos impostos sobre o ouro. Os mineiros, já espremidos pela derrama, pegaram em foices e mosquetes. Felipe dos Santos, líder do levante, foi arrastado pelas ruas antes de ser esquartejado. Suas últimas palavras ecoaram nas montanhas: "Morre um homem, mas não morre a causa".</p>
+				
+				<p><strong>Inconfidência Mineira (1789) – A Conspiração que Abalou o Império</strong></p>
+				<p>Nas tavernas escuras de Vila Rica, sob a luz tremeluzente das velas, homens de casaca e poetas de versos inflamados sussurravam nomes perigosos: Voltaire, Rousseau, Independência. Tiradentes, o alferes de bigode famoso, era a voz mais ardente da conspiração. Quando a traição veio, veio com gosto amargo. Enquanto os líderes ricos ganhavam perdões, Tiradentes foi esquartejado, seu sal grosso espalhado no caminho para apagar seu nome. Mas o sonho de liberdade? Esse não morreria.</p>
+				
+				<p><strong>Conjuração Baiana (1798) – A Revolução dos Deixados Para Trás</strong></p>
+				<p>Salvador, 1798. Panfletos manuscritos apareciam nas portas das igrejas, chamando negros libertos, alfaiates e soldados rasos à revolução. "É tempo de cortar o laço que nos prende a Portugal!", diziam. Lucas Dantas, João de Deus e outros líderes pobres planejavam um Brasil sem reis nem senhores. Quando a conspiração foi descoberta, a repressão foi exemplar: enforcamentos em praça pública, corpos esquartejados. Mas nas senzalas e nas ruas de terra do Pelourinho, o sonho de liberdade seguia vivo, esperando seu momento.</p>
+				
+				<h3>Epílogo: O Fogo que Não se Apaga</h3>
+				<p>De 1684 a 1798, o Brasil colonial foi um barril de pólvora. Cada revolta – seja dos nobres de Olinda, dos mineradores pobres ou dos escravizados sonhando com liberdade – foi uma faísca no caminho para a Independência. Esses homens e mulheres, com suas foices, suas penas e seus sonhos, escreveram a primeira página da história de um Brasil que ainda lutava para nascer. Seu legado? A certeza de que nenhum império dura para sempre quando um povo decide ser livre.</p>
+				
+                <h3>Personagens Importantes</h3>
+				
+				<img src="https://www.researchgate.net/publication/337806323/figure/fig5/AS:833286444167179@1575682378522/Figura-13-Jose-Wasth-Rodrigues-Retrato-de-Martim-Afonso-de-Souza-1932-oleo-sobre.jpg" alt="" class="content-image-personagens">
+                <p class="image-caption">Martim Afonso de Sousa (fundador de São Vicente)</p>
+
+                <img src="https://www.projetoagathaedu.com.br/imagens/blog/materias/historia-do-brasil/governo-geral/mem-de-sa.jpg" alt="" class="content-image-personagens">
+                <p class="image-caption">Mem de Sá (governador que expulsou os franceses)</p>
+				
+                <img src="https://th.bing.com/th/id/OIP.Vv7f-fF_YedBAdaYj4yKSwHaFM?r=0&rs=1&pid=ImgDetMain&cb=idpwebp2&o=7&rm=3" alt="" class="content-image-personagens">
+                <p class="image-caption">Zumbi dos Palmares (líder do Quilombo dos Palmares)</p>
+
+                <img src="https://th.bing.com/th/id/OIP.mFpuVlX6hLtqPCIe9LA3DQHaHa?r=0&rs=1&pid=ImgDetMain&cb=idpwebp2&o=7&rm=3" alt="" class="content-image-personagens">
+                <p class="image-caption">Aleijadinho (artista barroco do ciclo do ouro)</p>
+
+                <img src="https://static.preparaenem.com/2021/10/1-marques-de-pombal.jpg" alt="" class="content-image-personagens">
+				<p class="image-caption">Marquês de Pombal (reformador do século XVIII)</p>
+		
+			</div>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <!-- Período Imperial (meio) -->
+        <div class="era-section imperial">
+            <div class="era-header">
+                <h2>Período Imperial (1822-1889)</h2>
+            </div>
+            <div class="era-content imperial-content">
+                <h3>Da Independência à Proclamação da República</h3>
+                <p>O Brasil Império representou a consolidação da nação brasileira como Estado soberano. Foi marcado por significativas transformações políticas, sociais e econômicas, incluindo a gradual abolição da escravidão e a modernização do país.</p>
+                
+                <h3>Principais Eventos:</h3>
+                <ul>
+                    <li><strong>1822:</strong> Independência do Brasil (7 de setembro)</li>
+                    <li><strong>1822-1831:</strong> Primeiro Reinado de D. Pedro I</li>
+                    <li><strong>1831-1840:</strong> Período Regencial (governos provisórios)</li>
+                    <li><strong>1840-1889:</strong> Segundo Reinado de D. Pedro II</li>
+                    <li><strong>1864-1870:</strong> Guerra do Paraguai</li>
+                    <li><strong>1871:</strong> Lei do Ventre Livre</li>
+                    <li><strong>1885:</strong> Lei dos Sexagenários</li>
+                    <li><strong>1888:</strong> Lei Áurea (Abolição da Escravatura)</li>
+                </ul>
+                
+                <div class="info-box">
+                    <h4>Curiosidade: O Grito do Ipiranga</h4>
+                    <p>O famoso quadro "Independência ou Morte" de Pedro Américo, que retrata o momento do Grito do Ipiranga, foi pintado em 1888, 66 anos após o evento real. A cena foi idealizada e não corresponde exatamente à realidade histórica, mostrando como a memória nacional foi construída artisticamente.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <!-- Período Republicano (último) -->
+        <div class="era-section republicano">
+            <div class="era-header">
+                <h2>Período Republicano (1889-Presente)</h2>
+            </div>
+            <div class="era-content">
+                <h3>Da República Velha aos Dias Atuais</h3>
+                <p>A República brasileira representou a modernização do país, com industrialização, urbanização e democratização, embora marcada por períodos de autoritarismo e desafios sociais e econômicos.</p>
+                
+                <h3>Principais Fases:</h3>
+                <ul>
+                    <li><strong>1889-1930:</strong> República Velha (Política do Café-com-Leite)</li>
+                    <li><strong>1930-1945:</strong> Era Vargas (Estado Novo)</li>
+                    <li><strong>1946-1964:</strong> República Populista</li>
+                    <li><strong>1964-1985:</strong> Ditadura Militar</li>
+                    <li><strong>1985-Presente:</strong> Nova República (Redemocratização)</li>
+                </ul>
+                
+                <h3>Marcos Importantes:</h3>
+                <ul>
+                    <li><strong>1889:</strong> Proclamação da República por Deodoro da Fonseca</li>
+                    <li><strong>1932:</strong> Revolução Constitucionalista em SP</li>
+                    <li><strong>1943:</strong> CLT (Consolidação das Leis do Trabalho)</li>
+                    <li><strong>1960:</strong> Inauguração de Brasília</li>
+                    <li><strong>1985:</strong> Eleição de Tancredo Neves (fim do regime militar)</li>
+                    <li><strong>1988:</strong> Nova Constituição Federal</li>
+                    <li><strong>2002:</strong> Eleição de Lula, primeiro presidente operário</li>
+                </ul>
+                
+                <div class="info-box">
+                    <h4>Brasília: A Capital Modernista</h4>
+                    <p>Projetada por Lúcio Costa e Oscar Niemeyer, Brasília foi inaugurada em 21 de abril de 1960 como parte do plano de desenvolvimento "50 anos em 5" de Juscelino Kubitschek. Seu design modernista e forma de avião tornaram-na Patrimônio Mundial da UNESCO em 1987.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 História do Brasil - Todos os direitos reservados</p>
+            <p>Desenvolvido com fins educacionais</p>
+			<p>Avalie este site enviando um email neste endereço: gustavoarasantos23@gmail.com</p>
+        </div>
+    </footer>
+</body>
+</html>
